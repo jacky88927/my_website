@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "遊戲一",
+        "description": "這是一個有趣的喝酒遊戲。",
+        "players": ["4", "8"],
+        "props": ["none"]
+    },
+    {
+        "id": 2,
+        "name": "遊戲二",
+        "description": "這是另一個有趣的喝酒遊戲。",
+        "players": ["10"],
+        "props": ["cards"]
+    }
+]

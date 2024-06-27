@@ -1,41 +1,53 @@
-const quotes = [
-    "保持微笑，生活會更美好！",
-    "每天進步一點點。",
-    "相信自己，你可以做到！",
-    "成功是努力的結果。",
-    "夢想需要行動來實現。"
-];
+document.addEventListener('DOMContentLoaded', () => {
+    const gameList = document.getElementById('game-list');
+    const playersFilter = document.getElementById('players');
+    const propsFilter = document.getElementById('props');
 
-function changeQuote() {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    document.getElementById('quote').innerText = quotes[randomIndex];
-}
+    let games = [];
 
-function uploadPhoto() {
-    const photoUpload = document.getElementById('photo-upload');
-    if (photoUpload.files && photoUpload.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const img = document.createElement('img');
-            img.src = e.target.result;
-            document.getElementById('photos').appendChild(img);
+    fetch('games.json')
+        .then(response => response.json())
+        .then(data => {
+            games = data;
+            displayGames(games);
+        });
+
+    playersFilter.addEventListener('change', () => {
+        filterGames();
+    });
+
+    propsFilter.addEventListener('change', () => {
+        filterGames();
+    });
+
+    function filterGames() {
+        const playersValue = playersFilter.value;
+        const propsValue = propsFilter.value;
+
+        let filteredGames = games;
+
+        if (playersValue !== 'all') {
+            filteredGames = filteredGames.filter(game => game.players.includes(playersValue));
         }
-        reader.readAsDataURL(photoUpload.files[0]);
+
+        if (propsValue !== 'all') {
+            filteredGames = filteredGames.filter(game => game.props.includes(propsValue));
+        }
+
+        displayGames(filteredGames);
     }
-}
 
-document.getElementById('hidden-surprise').addEventListener('click', () => {
-    alert('恭喜你找到了隱藏的驚喜！');
+    function displayGames(games) {
+        gameList.innerHTML = '';
+        games.forEach(game => {
+            const gameItem = document.createElement('div');
+            gameItem.className = 'game-item';
+            gameItem.innerHTML = `
+                <h3>${game.name}</h3>
+                <p>${game.description}</p>
+                <a href="game.html?id=${game.id}">查看詳情</a>
+            `;
+            gameList.appendChild(gameItem);
+        });
+    }
 });
-
-function showRecommendations() {
-    const recommendations = [
-        "推薦內容 1",
-        "推薦內容 2",
-        "推薦內容 3"
-    ];
-    const recommendationsDiv = document.getElementById('recommendations');
-    recommendationsDiv.innerHTML = recommendations.map(item => `<p>${item}</p>`).join('');
-}
-
-document.addEventListener('DOMContentLoaded', showRecommendations);

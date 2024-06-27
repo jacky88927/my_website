@@ -3,34 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>有趣的網站</title>
+    <title>喝酒遊戲展示</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>歡迎來到有趣的網站</h1>
+        <h1>喝酒遊戲展示</h1>
     </header>
+    <nav>
+        <h2>篩選遊戲</h2>
+        <label for="players">人數：</label>
+        <select id="players">
+            <option value="all">全部</option>
+            <option value="4">4人</option>
+            <option value="8">8人</option>
+            <option value="10">10人以上</option>
+        </select>
+        <label for="props">道具：</label>
+        <select id="props">
+            <option value="all">全部</option>
+            <option value="none">無</option>
+            <option value="cards">撲克牌</option>
+            <option value="dice">骰子</option>
+        </select>
+    </nav>
     <main>
-        <section id="daily-quote">
-            <h2>每日一言</h2>
-            <p id="quote">"保持微笑，生活會更美好！"</p>
-            <button onclick="changeQuote()">換一句</button>
-        </section>
-        <section id="photo-wall">
-            <h2>照片牆</h2>
-            <input type="file" id="photo-upload" accept="image/*">
-            <button onclick="uploadPhoto()">上傳照片</button>
-            <div id="photos"></div>
-        </section>
-        <section id="hidden-surprise">
-            <h2>隱藏驚喜</h2>
-            <p>嘗試點擊這裡找找驚喜吧！</p>
-        </section>
-        <section id="personalized-recommendations">
-            <h2>個性化推薦</h2>
-            <div id="recommendations">這裡會顯示根據你的偏好推薦的內容。</div>
+        <section id="game-list">
+            <!-- 遊戲列表會動態插入這裡 -->
         </section>
     </main>
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
